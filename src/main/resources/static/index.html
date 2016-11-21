@@ -1,0 +1,170 @@
+<!doctype html>
+<html ng-app="app">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<form ng-submit="submit()" ng-controller="EventListController">
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>Events</h2>
+        <div class="row">
+                <div class="col-lg-3">
+                        <div class="input-group">
+                            <label for="category">Category</label>
+                                <select id="category"
+                                        class="form-control"
+                                        ng-model="inputCategory"
+                                        ng-options="category.id as category.name for category in categories">
+                                </select>
+                        </div>
+                </div>
+                <div class="col-lg-2">
+                        <div class="input-group">
+                                <label for="location">Location</label>
+                                <input id="location" type="text" class="form-control" placeholder="City name" ng-model="inputLocation">
+                        </div>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <label for="pageSize">Page Size</label>
+                        <select id="pageSize" class="form-control"
+                                ng-model="inputPageSize">
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="100">100</option>
+                            <option value="250">250</option>
+                            <option value="500">500</option>
+                        </select>
+                    </div>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-1">
+                    <div class="input-group">
+                        <label for="pageNumber">Page No#</label>
+                        <input id="pageNumber" type="text" class="form-control" placeholder="1" ng-model="inputPageNumber">
+                    </div>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-3">
+                        <div class="input-group">
+                            <label>Find Events</label>
+                            <input type="submit" id="submit" class="form-control btn btn-default"/>
+                        </div>
+                </div>
+        </div><!-- /.row -->
+    </div>
+</div>
+
+
+<div class="container">
+
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchFish">
+
+            </div>
+        </div>
+    </form>
+
+    <div class="alert alert-info">
+        <p>{{events.length}} events found for category: '{{inputCategory}}' in location: '{{inputLocation}}' and sorted by: '{{ sortType }}'</p>
+    </div>
+
+
+
+      <table class="table table-striped">
+          <thead>
+            <th>
+                <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+                    Date
+                    <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse">
+                    Title
+                    <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                    Description
+                    <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'venue_name'; sortReverse = !sortReverse">
+                    Venue
+                    <span ng-show="sortType == 'venue_name' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'venue_name' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'venue_address'; sortReverse = !sortReverse">
+                    Address
+                    <span ng-show="sortType == 'venue_address' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'venue_address' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'city_name'; sortReverse = !sortReverse">
+                    City
+                    <span ng-show="sortType == 'city_name' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'city_name' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>Weather</th>
+          </thead>
+          <tr ng-repeat="event in events | orderBy:sortType:sortReverse | filter:searchFish">
+
+              <td>
+                  {{event.start_time}}
+              </td>
+              <td>
+                  {{event.title}}
+              </td>
+              <td>
+                  <a href="#" data-toggle="tooltip" data-placement="left" title="{{event.description}}">{{event.description | limitTo: 60}}</a>
+              </td>
+              <td>
+                  {{event.venue_name}}
+              </td>
+              <td>
+                  {{event.venue_address}}
+              </td>
+              <td>
+                  {{event.city_name}}
+              </td>
+              <td>
+                  <a href="{{event.url}}" target="_blank">{{event.url}}</a>
+
+              </td>
+          </tr>
+      </table>
+    <pre>list={{events}}</pre>
+
+
+<!--    <form ng-submit="todoList.addTodo()">
+        <input type="text" ng-model="todoList.todoText"  size="30"
+               placeholder="add new todo here">
+        <input class="btn-primary" type="submit" value="add">
+    </form>-->
+</div>
+
+</form>
+
+<!-- Page Loads faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
