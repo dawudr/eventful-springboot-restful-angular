@@ -38,10 +38,12 @@ public class EventWeatherController {
                                                @RequestParam(value = EventConstants.QUERY_PARAM_PAGENUMBER, required=false, defaultValue="1") String pagenumber) throws IOException {
         List<Event> events = eventService.getEvents(location, category, startdate, enddate, pagesize, pagenumber);
         List<EventWeather> eventWeathers = new ArrayList<>();
-        for(Event event : events) {
-            Weather weather = weatherService.getWeather(event.getLatitude(), event.getLongitude(), event.getStart_time());
-            EventWeather eventWeather = new EventWeather(event, weather);
-            eventWeathers.add(eventWeather);
+        if (events != null && events.size() > 0) {
+            for (Event event : events) {
+                Weather weather = weatherService.getWeather(event.getLatitude(), event.getLongitude(), event.getStart_time());
+                EventWeather eventWeather = new EventWeather(event, weather);
+                eventWeathers.add(eventWeather);
+            }
         }
         return eventWeathers;
     }

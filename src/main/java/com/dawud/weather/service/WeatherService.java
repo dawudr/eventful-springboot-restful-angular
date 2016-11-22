@@ -14,8 +14,18 @@ public class WeatherService {
     @Autowired
     private WeatherRepository weatherRepository;
 
-    public Weather getWeather(Double latitude, Double longitude, Date date) throws IOException {
-        Weather weather = weatherRepository.getWeather(latitude, longitude, date);
+    public Weather getWeather(Double latitude, Double longitude, Date date) {
+        Weather weather = null;
+        try {
+            weather = weatherRepository.getWeather(latitude, longitude, date);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Weather emptyWeather = new Weather();
+            emptyWeather.setTemp("No data");
+            emptyWeather.setDescription("No data");
+            emptyWeather.setDt_txt(new Date());
+            return emptyWeather;
+        }
         return weather;
     }
 }
