@@ -36,7 +36,7 @@ These are the fours tiers
 The application.properties contains properties relating to the third party API end point calls.
 
 ## File Structure
-
+```
 ├── main
 │   ├── java
 │   │   └── com
@@ -94,4 +94,4 @@ The application.properties contains properties relating to the third party API e
                     ├── repository
                     │   └── WeatherRepositoryTest.java
                     └── service
-
+```
