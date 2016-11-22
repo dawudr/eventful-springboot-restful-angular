@@ -1,11 +1,8 @@
-package com.dawud.events.repository;
+package com.dawud.weather.repository;
 
 import com.dawud.config.EventfulRestClient;
-import com.dawud.events.domain.Event;
-import com.dawud.events.domain.Weather;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.dawud.weather.domain.Weather;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,11 +12,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static java.net.URLEncoder.encode;
+import java.util.Date;
 
 @Component
 public class WeatherRepository {

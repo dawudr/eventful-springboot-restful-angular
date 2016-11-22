@@ -1,7 +1,7 @@
-package com.dawud.events.service;
+package com.dawud.weather.service;
 
-import com.dawud.events.domain.Weather;
-import com.dawud.events.repository.WeatherRepository;
+import com.dawud.weather.domain.Weather;
+import com.dawud.weather.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

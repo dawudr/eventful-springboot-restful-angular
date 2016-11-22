@@ -1,4 +1,4 @@
-package com.dawud.events.domain;
+package com.dawud.weather.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

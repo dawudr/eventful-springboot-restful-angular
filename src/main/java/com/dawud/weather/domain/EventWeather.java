@@ -1,11 +1,10 @@
-package com.dawud.events.domain;
+package com.dawud.weather.domain;
 
 import com.dawud.events.domain.Event;
-import com.dawud.events.domain.Weather;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.util.Date;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EventWeather extends Event implements Serializable {
     private Weather weather;
