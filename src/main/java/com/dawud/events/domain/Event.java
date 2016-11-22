@@ -74,6 +74,30 @@ public class Event implements Serializable {
 
     private double longitude;
 
+
+    public Event() {}
+
+    public Event(String id, String title, String url, String description, Date start_time, Date stop_time, String venue_name, int venue_display, String venue_address, String city_name, String region_name, String region_abbr, String postal_code, String country_name, String county_abbr2, String country_abbr, double latitude, double longitude) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.description = description;
+        this.start_time = start_time;
+        this.stop_time = stop_time;
+        this.venue_name = venue_name;
+        this.venue_display = venue_display;
+        this.venue_address = venue_address;
+        this.city_name = city_name;
+        this.region_name = region_name;
+        this.region_abbr = region_abbr;
+        this.postal_code = postal_code;
+        this.country_name = country_name;
+        this.county_abbr2 = county_abbr2;
+        this.country_abbr = country_abbr;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Override
     public String toString() {
         return "Event{" +

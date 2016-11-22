@@ -24,7 +24,7 @@ angular.module('app', [])
                 "pageNumber" : $scope.inputPageNumber
         };
 
-       var response = $http.get('events', {
+       var response = $http.get('eventsandweather', {
             params: {location : formData.location, category : formData.category, page_size: formData.pageSize, page_number: formData.pageNumber}
         });
         response.success(function(data, status, headers, config) {

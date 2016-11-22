@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,17 +13,17 @@ public class Weather implements Serializable {
     private static final long serialVersionUID = -7788619177798333715L;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    String dt_txt;
+    Date dt_txt;
 
     String description;
 
     String temp;
 
-    public String getDt_txt() {
+    public Date getDt_txt() {
         return dt_txt;
     }
 
-    public void setDt_txt(String dt_txt) {
+    public void setDt_txt(Date dt_txt) {
         this.dt_txt = dt_txt;
     }
 

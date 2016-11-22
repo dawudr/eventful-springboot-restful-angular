@@ -61,7 +61,7 @@ public class EventRepositoryTest {
         assertNotNull(output.get(0).getTitle());
         assertNotNull(output.get(0).getStart_time());
         assertNotNull(output.get(0).getCity_name());
-        assertEquals("City name should be London", output.get(0).getCity_name().equalsIgnoreCase("London"));
+        assertEquals("City name should be London", output.get(0).getCity_name().toLowerCase(), "london");
     }
 
     @Test

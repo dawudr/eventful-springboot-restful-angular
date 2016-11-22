@@ -16,10 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static java.net.URLEncoder.encode;
 
@@ -35,7 +33,7 @@ public class WeatherRepository {
     private EventfulRestClient restClient;
 
     @Retryable(maxAttempts = 3, value = RuntimeException.class, backoff = @Backoff(delay = 2000, multiplier = 2))
-    public Weather getWeather(String latitude, String longitude, String date) throws IOException {
+    public Weather getWeather(Double latitude, Double longitude, Date date) throws IOException {
         String endPointUrl = weatherRestEndpointUrl + "&" + QUERY_PARAM_LATITUDE + "=" + latitude + "&" + QUERY_PARAM_LONGITUDE + "=" + longitude;
         System.out.println(endPointUrl);
 
@@ -52,7 +50,10 @@ public class WeatherRepository {
                     JsonNode weathersNode = root.get("list");
                     if (weathersNode != null && !weathersNode.asText().equals("null")) {
 
-                        weather.setDt_txt(weathersNode.get(0).get("dt_txt").asText());
+                        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date weatherDate = parser.parse(weathersNode.get(0).get("dt_txt").asText());
+
+                        weather.setDt_txt(weatherDate);
                         JsonNode main = weathersNode.get(0).get("main");
                         weather.setTemp(main.get("temp").asText());
 

@@ -18,10 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -41,13 +39,15 @@ public class WeatherRepositoryTest {
     @Test
     public void testGetWeather() throws Exception {
         String date = "2016-11-21 06:00:00";
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date weatherDate = parser.parse(date);
         String description = "light rain";
         String temp = "29";
-        String latitude = "35";
-        String longitute = "139";
+        Double latitude = 35d;
+        Double longitute = 139d;
 
 
-        Weather output = weatherRepository.getWeather(latitude, longitute, date);
+        Weather output = weatherRepository.getWeather(latitude, longitute, weatherDate);
         assertNotNull(output);
 
     }

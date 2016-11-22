@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,8 +32,14 @@ public class WeatherController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Weather getWeather(@RequestParam(value = "lat", required=true) String latitude,
                                                @RequestParam(value = "lon", required=true) String longitude,
-                                               @RequestParam(value = "date", required=false) String date) throws IOException {
-        Weather weather = weatherService.getWeather(latitude, longitude, date);
+                                               @RequestParam(value = "date", required=false) String date) throws IOException, ParseException {
+
+        Double latitudeD = Double.parseDouble(latitude);
+        Double longitudeD = Double.parseDouble(longitude);
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date weatherDate = parser.parse(date);
+
+        Weather weather = weatherService.getWeather(latitudeD, longitudeD, weatherDate);
         return weather;
     }
 

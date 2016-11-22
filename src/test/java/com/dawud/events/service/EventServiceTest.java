@@ -61,7 +61,7 @@ public class EventServiceTest {
             assertNotNull(events.get(0).getId());
             assertNotNull(events.get(0).getTitle());
             assertNotNull(events.get(0).getStart_time());
-            events.forEach(s -> assertEquals("City name should be London", s.getCity_name().equalsIgnoreCase("London")));
+            events.forEach(s -> assertEquals("City name should be London", s.getCity_name().toLowerCase(), "london"));
 
         } catch (IOException e) {
             e.printStackTrace();
