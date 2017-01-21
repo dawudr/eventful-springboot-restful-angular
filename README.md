@@ -1,4 +1,7 @@
 # eventful-springboot-restful-angular
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8fe725d3274847a3af8db9e751db32d0)](https://www.codacy.com/app/dawudr/eventful-springboot-restful-angular?utm_source=github.com&utm_medium=referral&utm_content=dawudr/eventful-springboot-restful-angular&utm_campaign=badger)
+
 SpringBoot App to consume Eventful API and Weather ApI
 
 This is a SpringBoot Maven project to consume Eventful and Open Weather API's. It uses Spring MVC,RestTemplate, Jackson JSON api to consume thrid party API.
